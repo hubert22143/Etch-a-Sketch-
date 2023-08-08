@@ -1,0 +1,65 @@
+html,body{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+h1,h2{
+    margin: 0;
+    padding: 0;
+}
+.container{
+    background-color: #686857;
+}
+.header{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 15vh;
+}
+.HeaderText{
+    display: flex;
+    justify-content: center;
+}
+h1{
+    color: #CCCCAA;
+}
+.SketchContainer{
+    display: flex;
+    height: 100%;
+    width: 100%
+}
+.SketchSettings{
+    margin-top: 20vh;
+    display: flex;
+    flex-direction: column;
+    margin-left: 30vh;
+    width: 20vh;
+    height: 60vh;
+}
+.SketchBox{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+}
+footer{
+    background-color: gray;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.menu{
+    display: flex;
+    justify-content: center;
+    color: tan;
+}
+.onebyoneblock{
+    width: 8px;
+    height: 8px;
+    border: 2px solid black;
+    background-color: white;
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etch a Sketch</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="HeaderText">
+                <h1>Etch a Sketch</h1>
+            </div>
+        </div>
+        <div class="SketchContainer">
+        <div class="SketchSettings">
+            <div class="menu">Menu</div>
+            <div class="Grid-Setting">
+                <label for="GridSettingType">Select Grid</label>
+                <select name="GridSettingType" id="GridStyle">
+                    <option value="1x1">1x1</option>
+                    <option value="2x2">2x2</option>
+                    <option value="4x4">4x4</option>
+                    <option value="16x16">16x16</option>
+                    <option value="32x32">32x32</option>
+                    <option value="64x64">64x64</option>
+                    <option value="128x128">128x128</option>
+                </select>
+            </div>
+            <div class="Grid-Custom">
+                <form class="GridCustomNumber">
+                <input type="text" id="textInput" placeholder="Please write a custom value">
+                <input type="submit" value="submit">
+            </form>
+            </div>
+        </div>
+        <div class="SketchBox">
+            
+        </div>
+        </div>
+    </div>
+    <footer>
+        <div class="FooterText">
+            <h2>The site was made by &copy; Baciak Hubert</h2>
+        </div>
+    </footer>
+</body>
+</html>
