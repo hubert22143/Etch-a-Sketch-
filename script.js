@@ -1,19 +1,57 @@
 document.addEventListener('DOMContentLoaded', () => {
     const gridStyleSelect = document.getElementById('GridStyle');
     const gridContainer = document.querySelector('.SketchBox');
- 
- 
-    gridContainer.addEventListener("mousemove", (e) => {
-            e.preventDefault();
-            e.target.style.backgroundColor = "blue";
+    const getColorInput = document.getElementById('colorInput');
+    const clearButton = document.querySelector('.Clear');
+    let isGridSet = false;
+    let selectedColor = "#000000"; // Default color
+
+
+    getColorInput.addEventListener("input", (e) => {
+        selectedColor = e.target.value;
+        console.log(`Your chosen color is ${selectedColor}`);
     });
+
+
+
+
+    gridContainer.addEventListener("mousemove", (e) => {
+        if(isGridSet && e.buttons === 1){
+            e.preventDefault();
+            e.target.style.backgroundColor = selectedColor;
+        }
+    });
+
+
+
+    gridContainer.addEventListener("dragstart", (e) => {
+        e.preventDefault();
+    });
+
+
+    clearButton.addEventListener("click", (e) => {
+        e.preventDefault();
+        const gridCubes = document.querySelectorAll('.onebyoneblock');
+        gridCubes.forEach(cube =>{
+        cube.style.backgroundColor = "white";
+        })
+
+    })
+
+
+
+
+
+
+
 
 
     gridStyleSelect.addEventListener("change", () => {
         const selectedGrid = gridStyleSelect.value;
         const [rows, cols] = selectedGrid.split("x");
         gridContainer.textContent = "";
-
+        isGridSet = true;
+        
         const blockWidth = 12; // Width of each block in pixels
         const blockHeight = 12; // Height of each block in pixels
         gridContainer.style.display = "flex";
@@ -41,6 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const inputValue = input.value;
 
     if(regexCorrectForm.test(inputValue)){
+        isGridSet = true;
         notificationText.style.display = "none";
         gridContainer.textContent = "";
         const [row,col] = inputValue.split("x")

@@ -71,3 +71,8 @@ footer{
     height: 94px;
     width: 158px;
 }
+.Are-U-Drawing{
+    display: flex;
+    justify-content: center;
+    height: 20px;
+}
