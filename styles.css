@@ -5,7 +5,7 @@ html,body{
     height: 100%;
     box-sizing: border-box;
 }
-h1,h2,p{
+h1,h2,p,div{
     margin: 0;
     padding: 0;
 }
@@ -44,6 +44,8 @@ h1{
     flex-wrap: wrap;
     margin: 0;
     padding: 0;
+    border: 1px solid black;
+    box-sizing: border-box;
 }
 footer{
     background-color: gray;
@@ -58,16 +60,21 @@ footer{
     color: tan;
 }
 .onebyoneblock{
-    width: 8px;
-    height: 8px;
-    border: 2px solid black;
+    border: 1px solid black;
     background-color: white;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 .button-holder{
     display: flex;
     justify-content: flex-end;
+    margin: 0;
+    padding: 0;
 }
 .Grid-Custom{
+    margin: 0;
+    padding: 0;
     height: 94px;
     width: 158px;
 }
@@ -75,4 +82,25 @@ footer{
     display: flex;
     justify-content: center;
     height: 20px;
+    margin: 0;
+    padding: 0;
+}
+button{
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+button:hover {
+    background-color: #45a049;
+}
+button:active {
+    background-color: #3e8e41;
 }

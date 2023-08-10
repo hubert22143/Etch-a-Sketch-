@@ -3,26 +3,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const gridContainer = document.querySelector('.SketchBox');
     const getColorInput = document.getElementById('colorInput');
     const clearButton = document.querySelector('.Clear');
+    const rainbowButton = document.querySelector('.Rainbow');
     let isGridSet = false;
     let selectedColor = "#000000"; // Default color
-
+   
 
     getColorInput.addEventListener("input", (e) => {
         selectedColor = e.target.value;
         console.log(`Your chosen color is ${selectedColor}`);
     });
-
-
-
-
+    rainbowButton.addEventListener("click", (e) =>{
+        e.preventDefault()
+        if(rainbowButton.classList.contains("active")){
+            rainbowButton.classList.remove("active");
+        }else{
+            rainbowButton.classList.add("active");
+        }
+    })
+    const rainbowColors = ["#FF0000", "#FF7F00", "#FFFF00", "#00FF00", "#0000FF", "#4B0082", "#9400D3"];
     gridContainer.addEventListener("mousemove", (e) => {
         if(isGridSet && e.buttons === 1){
             e.preventDefault();
             e.target.style.backgroundColor = selectedColor;
+            const rainbowModeActive = rainbowButton.classList.contains("active")
+            if(rainbowModeActive){
+                const randomColorIndex = Math.floor(Math.random() * rainbowColors.length);
+                e.target.style.backgroundColor = rainbowColors[randomColorIndex];
+            }
         }
     });
-
-
 
     gridContainer.addEventListener("dragstart", (e) => {
         e.preventDefault();
@@ -40,7 +49,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+    const createGrid = (rows, cols) => {
+        gridContainer.textContent = "";
+        isGridSet = true;
 
+        const blockWidth = (gridContainer.clientWidth - 1) / cols;
+        const blockHeight = (gridContainer.clientHeight - 1) / rows;
+        gridContainer.style.display = "flex";
+        gridContainer.style.flexWrap = "wrap";
+        gridContainer.style.backgroundColor = "white";
+
+        const totalCubes = rows * cols;
+
+        for (let i = 0; i < totalCubes; i++) {
+            const gridCube = document.createElement("div");
+            gridCube.style.width = `${blockWidth}px`;
+            gridCube.style.height = `${blockHeight}px`;
+            gridCube.className = "onebyoneblock";
+            gridContainer.appendChild(gridCube);
+        }
+    };
+    // Call the createGrid function with the default value of 16x16
+    createGrid(16, 16);
 
 
 
@@ -52,28 +82,33 @@ document.addEventListener('DOMContentLoaded', () => {
         gridContainer.textContent = "";
         isGridSet = true;
         
-        const blockWidth = 12; // Width of each block in pixels
-        const blockHeight = 12; // Height of each block in pixels
+        const blockWidth = (gridContainer.clientWidth - 1) / cols;
+        const blockHeight = (gridContainer.clientHeight - 1) / rows;
         gridContainer.style.display = "flex";
-        // We calculate the container width and heigth because we need it to
-        // scale appropriatelly to the elements there are in the box.
-        // it is needed so the flexwrap work correctly.
-        gridContainer.style.width = `${blockWidth * cols}px`; // Calculate container width
-        gridContainer.style.height = `${blockHeight * rows}px`; // Calculate container height
+        // We calculate the block width and heigth, so it's scale appropriatelly
+        // to the cubes are within the gridcontainer.
         gridContainer.style.flexWrap = "wrap";
-
-        const totalCubes = rows * cols;
+        gridContainer.style.backgroundColor= "white";
         
+        const totalCubes = rows * cols;
+
         for (let i = 0; i < totalCubes; i++) {
             const gridCube = document.createElement("div");
+            gridCube.style.width = `${blockWidth}px`;
+            gridCube.style.height = `${blockHeight}px`;
             gridCube.className = "onebyoneblock";
             gridContainer.appendChild(gridCube);
         }
     });
+
+
+
     const submitbutton = document.getElementById('GridSubmit');
     const input = document.getElementById('textInput');
     const notificationText = document.getElementById('notificationText');
     const regexCorrectForm = /^\d+x\d+$/;
+
+
     submitbutton.addEventListener("click", (e) => {
         e.preventDefault();
     const inputValue = input.value;
@@ -83,14 +118,14 @@ document.addEventListener('DOMContentLoaded', () => {
         notificationText.style.display = "none";
         gridContainer.textContent = "";
         const [row,col] = inputValue.split("x")
-        const blockWidth = 12;
-        const blockHeight = 12;
-        gridContainer.style.width = `${blockWidth * col}px`;
-        gridContainer.style.height = `${blockHeight * row}px`;
+        const blockWidth = (gridContainer.clientWidth - 1) / col;
+        const blockHeight = (gridContainer.clientHeight - 1) / row;
         const totalCube = row * col;
         for (let i = 0; i < totalCube; i++) {
             const gridCube = document.createElement("div");
             gridCube.className = "onebyoneblock";
+            gridCube.style.width = `${blockWidth}px`;
+            gridCube.style.height = `${blockHeight}px`;
             gridContainer.appendChild(gridCube);
         }
     }else{
