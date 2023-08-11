@@ -14,24 +14,28 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     rainbowButton.addEventListener("click", (e) =>{
         e.preventDefault()
-        if(rainbowButton.classList.contains("active")){
-            rainbowButton.classList.remove("active");
-        }else{
-            rainbowButton.classList.add("active");
-        }
+        rainbowButton.classList.toggle("active");
     })
+
     const rainbowColors = ["#FF0000", "#FF7F00", "#FFFF00", "#00FF00", "#0000FF", "#4B0082", "#9400D3"];
     gridContainer.addEventListener("mousemove", (e) => {
-        if(isGridSet && e.buttons === 1){
-            e.preventDefault();
-            e.target.style.backgroundColor = selectedColor;
-            const rainbowModeActive = rainbowButton.classList.contains("active")
-            if(rainbowModeActive){
-                const randomColorIndex = Math.floor(Math.random() * rainbowColors.length);
-                e.target.style.backgroundColor = rainbowColors[randomColorIndex];
-            }
+        if (e.buttons === 1) {
+            e.target.style.backgroundColor = rainbowButton.classList.contains("active") ? getRandomRainbowColor() : selectedColor;
         }
     });
+    gridContainer.addEventListener("contextmenu", (e) => {
+        e.preventDefault(); // Prevent the default context menu behavior so you can't rpm there.
+    });
+    gridContainer.addEventListener("mousemove", (e) => {
+        if(e.buttons === 2){
+            e.preventDefault();
+            e.target.style.backgroundColor = "white";
+        }
+    })
+    const getRandomRainbowColor = () => {
+        const randomColorIndex = Math.floor(Math.random() * rainbowColors.length);
+        return rainbowColors[randomColorIndex];
+    };
 
     gridContainer.addEventListener("dragstart", (e) => {
         e.preventDefault();
@@ -46,9 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
         })
 
     })
-
-
-
     const createGrid = (rows, cols) => {
         gridContainer.textContent = "";
         isGridSet = true;
